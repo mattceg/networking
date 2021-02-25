@@ -14,3 +14,20 @@ resource "google_compute_subnetwork" "subnet"{
      depends_on = [google_compute_network.vpc]
      region = "us-central1"
 }
+
+//VPC firewall configuration
+
+resource "google_compute_firewall" "firewall"{
+  name = "matt-03-firewall"
+  network = google_compute_network.vpc.name
+  allow{
+    protocol = "icmp"
+  }
+  allow{
+    protocol="tcp"
+    ports =["22"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
+   
