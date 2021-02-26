@@ -9,10 +9,10 @@ resource "google_compute_network" "vpc"{
 
 resource "google_compute_subnetwork" "subnet"{
      name = "matt-03-subnet"
-     ip_cidr_range = "10.10.3.0/24"
+     ip_cidr_range = var.subnet_cidr_block
      network = google_compute_network.vpc.name
      depends_on = [google_compute_network.vpc]
-     region = "us-central1"
+     region = var.region
 }
 
 //VPC firewall configuration
